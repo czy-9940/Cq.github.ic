@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Calendar</title>
+  <style>
+*,img,p{
+    padding: 0;
+    margin: 0;
+}
+   .flex{
+    width: 100%2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+   }
+   .laba{
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    display: flex;
+    align-items: center;
+    color: #A47E40;
+    font-size: 12.8px;
+    background: #FCEEC7;
+   }
+   .icon{
+    width: 14px;
+    padding-left: 20px;
+   }
+   .pl10{
+    padding-left: 8px;
+   }
+   .large{
+    font-size: 15px;
+    color: #E89758;
+   }
+   .white{
+    width: 325px;
+    height: 404px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+   }
+   .white img{
+    height: 200px;   
+    width: 200px;
+    margin-top: 12px;
+   }
+   .time{
+    margin-top: 30px;
+    font-size: 13.5px;
+   }
+   .gla{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    width: 274px;
+    height: 25px;
+    line-height: 25px;
+    font-size: .7375rem;
+    color: #9B9B9B;
+    background: #F6F6F6;
+    border-radius: 3px;
+   }
+   .p{
+    margin-top: 20px;
+    line-height: 20px;
+    font-size: 1.3rem;
+    color: #4EC084;
+   }
+   .sma{
+    margin-right: 20px;
+    font-size: .8rem;
+    color: #000;
+   }
+   .p:last-child{
+    margin-top: 10px;
+   }
+  .last{
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+   }
+   .Group{
+    position: fixed;
+    right: 0;
+    top: 16%;
+   }
+  </style>
+</head>
+<body>
+    <div class="flex">
+        <img class="Group" src="https://czy-dev.oss-cn-beijing.aliyuncs.com/Group.png" alt="">
+        <div class="laba">
+            <img src="https://czy-dev.oss-cn-beijing.aliyuncs.com/Vector.png" alt="" class="icon">
+            <span class="pl10">请务必在预约时间段<span class="large">前5分钟</span>内进站</span>
+        </div>
+        <div class="white">
+            <p class="time">失效时间:   02分<span id="countdown">60</span>秒</p>
+            <img src="https://czy-dev.oss-cn-beijing.aliyuncs.com/5000qrCode.png" alt="" >
+            <p class="gla">请凭此二维码，前往地铁站指定预约通道扫码进站</p>
+            <p class="p"><span class="sma">6号线</span>江北城站</p>
+            <p class="p"><span class="sma" id="date"></span>18:00～18:20</p>
+        </div>
+        <img class="last" src="https://czy-dev.oss-cn-beijing.aliyuncs.com/1718353474985.jpg" alt="">
+    </div>
+    <script>
+        // 获取当前日期
+        const today = new Date();
+
+        // 提取年、月、日
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // 月份从0开始，所以要加1
+        const day = String(today.getDate()).padStart(2, '0');
+
+        // 组装日期字符串
+        const currentDate = `${year}-${month}-${day}`;
+
+        // 显示日期
+        document.getElementById('date').textContent = currentDate;
+
+        let countdownInterval;
+        
+        function startCountdown() {
+            // 初始化时间
+            let timeLeft = 60;
+
+            // 获取显示倒计时的元素
+            const countdownElement = document.getElementById('countdown');
+            countdownElement.textContent = timeLeft;
+
+            // 清除现有的倒计时（如果有）
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+
+            // 更新倒计时函数
+            function updateCountdown() {
+                if (timeLeft > 0) {
+                    timeLeft--; // 减少一秒
+                    countdownElement.textContent = timeLeft; // 更新显示的文本
+                } else {
+                    clearInterval(countdownInterval); // 清除倒计时
+                }
+            }
+
+            // 每秒更新一次倒计时
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+        startCountdown()
+    </script>
+</body>
+</html>
