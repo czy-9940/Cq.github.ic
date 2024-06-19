@@ -141,32 +141,25 @@
         let countdownInterval;
         
         function startCountdown() {
-            // 初始化时间
-            let timeLeft = 60;
-
-            // 获取显示倒计时的元素
+            let timeLeft = 3; // 设置倒计时时间为60秒
             const countdownElement = document.getElementById('countdown');
-            countdownElement.textContent = timeLeft;
 
-            // 清除现有的倒计时（如果有）
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
+            const interval = setInterval(function() {
+                let seconds = timeLeft % 60;
+                // 格式化秒数，个位数前加0
+                countdownElement.innerHTML = (seconds < 10 ? "0" : "") + seconds ;
+                timeLeft--;
 
-            // 更新倒计时函数
-            function updateCountdown() {
-                if (timeLeft > 0) {
-                    timeLeft--; // 减少一秒
-                    countdownElement.textContent = timeLeft; // 更新显示的文本
-                } else {
-                    clearInterval(countdownInterval); // 清除倒计时
+                if (timeLeft < 0) {
+                    clearInterval(interval);
+                    startCountdown(); // 重新启动倒计时
                 }
-            }
-
-            // 每秒更新一次倒计时
-            countdownInterval = setInterval(updateCountdown, 1000);
+            }, 1000); // 每秒更新一次倒计时
         }
-        startCountdown()
+
+        window.onload = function() {
+            startCountdown();
+        };
     </script>
 </body>
 </html>
