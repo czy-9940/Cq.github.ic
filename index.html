@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>预约结果</title>
     <style>
-        body{
-            overflow: hidden;
-        }
         ul {
             list-style-type: none;
             /* 去除列表项前面的点 */
@@ -158,56 +155,81 @@
             /* 添加边框以便于观察 */
             cursor: pointer;
         }
+
         li:nth-child(1) {
-            background-color: #cf1212; /* 第一项背景色 */
+            background-color: #cf1212;
+            /* 第一项背景色 */
         }
+
         li:nth-child(2) {
-            background-color: #10b329; /* 第二项背景色 */
+            background-color: #10b329;
+            /* 第二项背景色 */
         }
+
         li:nth-child(3) {
-            background-color: #10b329; /* 第三项背景色 */
+            background-color: #10b329;
+            /* 第三项背景色 */
         }
+
         li:nth-child(4) {
-            background-color: #1c22cd; /* 第四项背景色 */
+            background-color: #1c22cd;
+            /* 第四项背景色 */
         }
+
         li:nth-child(5) {
-            background-color: #1c22cd; /* 第五项背景色 */
+            background-color: #1c22cd;
+            /* 第五项背景色 */
         }
+
         li:nth-child(6) {
-            background-color: #30a7eb; /* 第六项背景色 */
+            background-color: #30a7eb;
+            /* 第六项背景色 */
         }
+
         li:nth-child(7) {
-            background-color: #f38fbc; /* 第七项背景色 */
+            background-color: #f38fbc;
+            /* 第七项背景色 */
         }
+
         li:nth-child(8) {
-            background-color: #f38fbc; /* 第八项背景色 */
+            background-color: #f38fbc;
+            /* 第八项背景色 */
         }
+
         li:nth-child(9) {
-            background-color: #d2be6d; /* 第八项背景色 */
+            background-color: #d2be6d;
+            /* 第八项背景色 */
         }
-        .tip{
+
+        .tip {
             padding: 10px;
             font-size: 14px;
+        }
+
+        body {
+            overflow: hidden;
         }
     </style>
 </head>
 
 <body>
-    <ul class="address" id="myList">
-        <li data-value="石桥铺站">石桥铺站</li>
-        <li data-value="杨家坪站">杨家坪站</li>
-        <li data-value="临江门站">临江门站</li>
-        <li data-value="金童路站">金童路站</li>
-        <li data-value="金渝站">金渝站</li>
-        <li data-value="幸福广场站">幸福广场站</li>
-        <li data-value="江北城站">江北城站</li>
-        <li data-value="光电园站">光电园站</li>
-        <li data-value="沙坪坝站">沙坪坝站</li>
-        <p class="tip">使用方法：<br/>选择一个站点，点击一下，可获得当前站点的预约二维码<br/>
+    <div id="myListBox">
+        <ul class="address" id="myList">
+            <li data-value="石桥铺站">石桥铺站</li>
+            <li data-value="杨家坪站">杨家坪站</li>
+            <li data-value="临江门站">临江门站</li>
+            <li data-value="金童路站">金童路站</li>
+            <li data-value="金渝站">金渝站</li>
+            <li data-value="幸福广场站">幸福广场站</li>
+            <li data-value="江北城站">江北城站</li>
+            <li data-value="光电园站">光电园站</li>
+            <li data-value="沙坪坝站">沙坪坝站</li>
+        </ul>
+        <p class="tip">使用方法：<br />选择一个站点，点击一下，可获得当前站点的预约二维码<br />
             在<span style="color: #cf1212">二维码页面</span>
             刷新一下，可重新再选择站点
         </p>
-    </ul>
+    </div>
     <div class="flex" style="display: none;" id="concent">
         <img class="Group" src="https://czy-dev.oss-cn-beijing.aliyuncs.com/Group.png" alt="">
         <div class="laba">
@@ -227,14 +249,14 @@
         document.addEventListener("DOMContentLoaded", function () {
             var listItems = document.querySelectorAll("#myList li");
             var adressText = document.getElementById("adressText");
-            var ul = document.getElementById("myList");
+            var myListBox = document.getElementById("myListBox");
             var concent = document.getElementById("concent");
 
             listItems.forEach(function (item) {
                 item.addEventListener("click", function () {
                     var dataValue = item.getAttribute("data-value");
                     adressText.textContent = dataValue;
-                    ul.style.display = "none";
+                    myListBox.style.display = "none";
                     concent.style.display = "flex";
                 });
             });
